@@ -26,6 +26,7 @@ usage(const char *program_path) {
     << "Usage:"                          << std::endl
     << "  " << program_name << " <time>" << std::endl
     << "  " << program_name << " -h"     << std::endl
+    << "  " << program_name << " -v"     << std::endl
     << std::endl
     << "Arguments:"                      << std::endl
     << "  <time>"                        << std::endl
@@ -33,16 +34,27 @@ usage(const char *program_path) {
     << std::endl
     << "Options"                         << std::endl
     << "  -h"                            << std::endl
-    << "    show help"                   << std::endl;
+    << "    show help"                   << std::endl
+    << "  -v"                            << std::endl
+    << "    show version"                << std::endl;
+}
+
+const auto VERSION = "1.0";
+void
+version(void) {
+  std::cout << "version: " << VERSION << std::endl;
 }
 
 int
 main(int argc, char *argv[]) {
   int opt;
-  while ((opt = getopt(argc, argv, "h")) != -1) {
+  while ((opt = getopt(argc, argv, "hv")) != -1) {
     switch (opt) {
       case 'h':
         usage(argv[0]);
+        return 0;
+      case 'v':
+        version();
         return 0;
       default:
         return 1;
